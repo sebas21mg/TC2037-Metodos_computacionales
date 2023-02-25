@@ -66,7 +66,9 @@ https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols
    Then:
 
    $\frac{(k+1)^2(k+2)^2}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}\rightarrow$ 
-   $\frac{(k+1)^2((k+1)+1)^2}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}\rightarrow$
+   $\frac{(k+1)^2((k+1)+1)^2}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$
+
+   $\square$
  
 3.  Using the tree below, give the values of each of the items:
     ![Tree image](sample_tree.png)
