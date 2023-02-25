@@ -33,50 +33,50 @@ https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols
 2.  Prove by induction on $n$ that:
 
     $\sum_{i=0}^{n}i^3 = \frac{n^2(n+1)^2}{4}$
-	
-   _**SOLUTION:**_
 
-   I. **Basis:**:
-   If $n=0 \rightarrow$ $\frac{0^2(0+1)^2}{4} = 0$ 
+_**SOLUTION:**_
 
-   II. **Inductive Hypothesis:**
+I. **Basis:**:
+If $n=0 \rightarrow$ $\frac{0^2(0+1)^2}{4} = 0$
 
-   $\sum_{i=0}^{k}i^3 = \frac{k^2(k+1)^2}{4}$
+II. **Inductive Hypothesis:**
 
-   III. **Inductive Step:**
+$$\sum_{i=0}^{k}i^3 = \frac{k^2(k+1)^2}{4}$$
 
-   $\sum_{i=0}^{k+1}i^3 = \frac{(k+1)^2((k+1)+1)^2}{4}\rightarrow$
-   $\sum_{i=0}^{k}i^3 + (k+1)^3 = \frac{(k+1)^2((k+1)+1)^2}{4}\rightarrow$
+III. **Inductive Step:**
 
-   With the hypothesis: $\sum_{i=0}^{k}i^3 = \frac{k^2(k+1)^2}{4}$ then
+$$\sum_{i=0}^{k+1}i^3 = \frac{(k+1)^2((k+1)+1)^2}{4}\rightarrow$$
+$$\sum_{i=0}^{k}i^3 + (k+1)^3 = \frac{(k+1)^2((k+1)+1)^2}{4}\rightarrow$$
 
-   $\rightarrow \frac{k^2(k+1)^2}{4} + (k+1)^3 = \frac{(k+1)^2((k+1)+1)^2}{4}$
-   $\rightarrow \frac{k^2(k+1)^2 + 4(k+1)^3}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$
+With the hypothesis: $\sum_{i=0}^{k}i^3 = \frac{k^2(k+1)^2}{4}$ then
 
-   $\rightarrow \frac{k^2(k+1)^2 + 4(k+1)^3}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$
+$$\rightarrow \frac{k^2(k+1)^2}{4} + (k+1)^3 = \frac{(k+1)^2((k+1)+1)^2}{4}$$
+$$\rightarrow \frac{k^2(k+1)^2 + 4(k+1)^3}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$$
 
-   Now... $(k+1)^3$ can be seen as $(k+1)^2(k+1)$, therefore we can factorize:
+$$\rightarrow \frac{k^2(k+1)^2 + 4(k+1)^3}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$$
 
-   $\frac{(k+1)^2(k^2 + 4(k+1))}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$
-   $\rightarrow\frac{(k+1)^2(k^2 + 4k + 4)}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$
+Now... $(k+1)^3$ can be seen as $(k+1)^2(k+1)$, therefore we can factorize:
 
-   $\rightarrow\frac{(k+1)^2(k^2 + 4k + 4)}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$
+$$\frac{(k+1)^2(k^2 + 4(k+1))}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$$
+$$\rightarrow\frac{(k+1)^2(k^2 + 4k + 4)}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$$
 
-   We know that $(a+b)^2 = a^2 + 2ab + b^2$, then $(k^2+4k+4)=(k+2)^2$ and $(k+2)^2$ also is $((k+1)+1)^2$, therefore: $(k+2)^2=((k+1)+1)^2$
-   Then:
+$$\rightarrow\frac{(k+1)^2(k^2 + 4k + 4)}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$$
 
-   $\frac{(k+1)^2(k+2)^2}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}\rightarrow$ 
-   $\frac{(k+1)^2((k+1)+1)^2}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$
+We know that $(a+b)^2 = a^2 + 2ab + b^2$, then $(k^2+4k+4)=(k+2)^2$ and $(k+2)^2$ also is $((k+1)+1)^2$, therefore: $(k+2)^2=((k+1)+1)^2$
+Then:
 
-   $\square$
- 
+$$\frac{(k+1)^2(k+2)^2}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$$
+$$\rightarrow \frac{(k+1)^2((k+1)+1)^2}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$$
+
+$$\square$$
+
 3.  Using the tree below, give the values of each of the items:
     ![Tree image](sample_tree.png)
 
         a. the depth of the tree
 
-	The depth of the tree is 5.
-        
+    The depth of the tree is 5.
+
         b. the ancestors of x18
 
         The ancestors are: x15, x10, x4 and x1.
