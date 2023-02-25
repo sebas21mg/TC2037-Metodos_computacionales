@@ -6,7 +6,7 @@ https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols
 ## Names:
 
 - Sebastian Moncada (A01027028)
-- name2
+- Samuel Acevedo (A01026893)
 
 ## Exercises:
 
