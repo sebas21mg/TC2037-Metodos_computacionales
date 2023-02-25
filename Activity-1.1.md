@@ -10,11 +10,25 @@ https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols
 
 ## Exercises:
 
-1.  Let $X$ be a finite set. Give a recursive definition of the set of subsets
-    of $X$ (the Power set of $X$) $P(X)$.
-    Use union as the operator on the definition
+1.  Let $X$ be a finite set. Give a recursive definition of the set of subsets of $X$ (the Power set of $X$) $P(X)$. Use union as the operator on the definition
 
     _**SOLUTION:**_
+
+    **I. Basis:**
+
+    $$n \in X $$ 
+    $$Y = \{1,2,3,4,...,n-1\} \ | \ Y\subset X$$
+
+    **II. Recursive step:** if $X = Y \cup n$, then $P(X) = P(Y) \cup \{n\}$
+
+    **For example:** Let $n = 3$. Then
+
+    $$Y = \{1,2\}$$
+    $$P(Y) = \{ \{ \},\{ 1 \},\{ 2 \},\{ 1, 2 \} \}$$
+    $$\{ n \} = \{ 3 \}$$
+    $$P(X) = P(Y) \cup \{ 3 \} = \{ \{ \},\{ 1 \},\{ 2 \},\{ 1, 2 \} \} \cup \{ \{ 3 \},\{ 1, 3 \},\{ 2, 3 \},\{ 1, 2, 3 \} \}$$
+
+    **III. Closure:** $P(X) = P(Y) \cup \{n\}$ only if it can be obtained from the basis using a finite number of applications of the recursive step.
 
 2.  Prove by induction on $n$ that:
 

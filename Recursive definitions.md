@@ -2,7 +2,7 @@
 
 ## Example 1: Recursive definition of Factorial
 
-I. **Basics**: $ f(0) = 1 $
+I. **Basis**: $ f(0) = 1 $
 
 II. **Recursive Step**: If $ f(n) = x $ then $ f(n + 1) = f(n) \times (n + 1) $
 
@@ -26,7 +26,7 @@ I. **Basis**: $[0, 1] \ 0 < 1$
 
 II. **Inductive Hypothesis**: Assume that $ x < y $ for all elements $ [x, y] \in LT_n $
 
-III. **Inductive Step**: for value $ [i, y] \in LT_{n + 1} $
+III. **Inductive Step**: for value $ [i, y] \in LT\_{n + 1} $
 
 $ [i, j] = [x, s(y)] $
 
@@ -40,7 +40,7 @@ Demonstrate: $\sum_{i=0}^{n}i = \frac{n(n+1)}{2}$
 
 I. **Basis**: If $n = 0$ then $\frac{0(0+1)}{2} = \frac{0}{2}=0$
 
-II. **Inductive Hypothesis**: If $n = k$ then it holds that 
+II. **Inductive Hypothesis**: If $n = k$ then it holds that
 
 $$\sum_{i=0}^{k}i = \frac{k(k+1)}{2}$$
 
