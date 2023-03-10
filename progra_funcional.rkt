@@ -1,7 +1,7 @@
 #| 
 Activity 2: 
 
-Sebastián Moncada
+Sebastian Moncada
 Samuel Acevedo
 |#
 
