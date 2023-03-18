@@ -31,15 +31,25 @@ https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols
 
     #|string|#|string|#|string
     -|-|-|-|-|-
-    1||2||3|
+    1|aa $\lambda$|2|aab|3|aaab
+    4|bb $\lambda$|5|bbb|6|bbab
 
     b. How many strings of length 6 are there in $X^*$?
+    #|string|#|string|#|string
+    -|-|-|-|-|-
+    1|aaaaaa|2|aaaabb|3|aabbaa
+    4|bbaaaa|5|bbbbaa|6|bbaabb
+    7|aabbbb|8|bbbbbb
 
+    There are 8 strings of length 6 in $X^*$
 
     c. List the strings in set $Y^*$ of length three or less
 
     #|string|#|string|#|string
     -|-|-|-|-|-
+    1| $\lambda$|2|b|3|ab
+    4|bb|5|bab|6|abb
+    7|bbb
 
 
 
@@ -47,6 +57,12 @@ https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols
 
     #|string|#|string|#|string
     -|-|-|-|-|-
+    1| $\lambda$|2|b|3|ab
+    4|bb|5|bab|6|abb
+    7|bbb|8|abab|9|babb
+    10|bbab|11|abbb|12|bbbb
+    13|aa|14|aa b aa ab|15|aabb
+    16|aaaa|17|aabb|18|bbaa
 
 
 
