@@ -1,5 +1,7 @@
 ; Sebastian Moncada - A01027028
 ; Samuel Acevedo - A01026893
+; Programando un DFA reconocedor de tokens en un lenguaje de programación 
+; 23 04 2023
 
 #lang racket
 
@@ -33,7 +35,7 @@
                         new-state
                         (if found (cons found tokens) tokens)))]))) ; The new list of tokens
 
-; DFA reconocedor de tokens en un lenguaje de programación 
+; DFA
 (define (delta-arithmetic initial-state accept-states)
     " Transition function to validate the argument is a number
       Initial state: start
