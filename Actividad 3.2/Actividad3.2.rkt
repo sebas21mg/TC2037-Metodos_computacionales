@@ -15,7 +15,7 @@
     (member char '(#\+ #\- #\* #\/ #\= #\^)))
 
 (define (evaluate-dfa dfa-to-evaluate string-to-evaluate)
-    (trace-let loop
+    (let loop
 
         ([chars (string->list string-to-evaluate)] ; Convert the string into a list of characters
          [state (dfa-initial dfa-to-evaluate)] ; Get the initial state of the dfa

@@ -1,0 +1,16 @@
+# Activity 3.3 - Practicando los lenguajes libres de contexto
+
+## Names
+
+- Sebastian Moncada
+- Samuel Acevedo
+
+## Exercises
+
+1. **BNF**
+
+   <def-module> ::= defmodule <module-name> do\n <body>\n end
+
+   <simple-func> ::= <def-func> <function-name>(<parameters>), do: <output>
+
+   <def-func> ::= def | defp
