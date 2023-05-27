@@ -19,7 +19,7 @@ Samuel Acevedo
      [res '()])
     (if (empty? lst)
     (reverse res)
-    (loop (cdr lst) (cons (list (car lst))res)))))
+    (loop (cdr lst) (cons (list (car lst)) res)))))
 
 #| 
  
