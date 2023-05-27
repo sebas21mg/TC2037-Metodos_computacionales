@@ -5,50 +5,54 @@
 
 #lang racket
 
-(provide (all-defined-out)) ; Provee todas las funciones
-(require racket/trace) ; Es necesario para poder usar el 'trace'
+(provide (all-defined-out)) ; Provide all functions
+(require racket/trace) ; Needed to use the 'trace' function
 
 ; Declare the structure that describes a DFA
 (struct dfa (func initial accept))
 
+; Check if the input char is a valid operator
 (define (char-operator? char)
   (member char '(#\+ #\- #\* #\/ #\= #\^)))
 
+; Function of the DFA
 (define (evaluate-dfa dfa-to-evaluate string-to-evaluate)
   (let loop
 
     ([chars (string->list string-to-evaluate)] ; Convert the string into a list of characters
     [state (dfa-initial dfa-to-evaluate)] ; Get the initial state of the dfa
     [tokens '()] ; The return list with all the tokens found
-    [temp-values '()] ; The return list wiht all the values of the tokens found
-    )
+    [token-values '()]) ; List to store all the chars of the current token
 
     (cond 
+
       ; When the list of chars is over, check if the final state is acceptable
       [(empty? chars)
         (if (member state (dfa-accept dfa-to-evaluate))
-          (if (empty? temp-values)
-            (reverse tokens)
-            (reverse (cons (list (list->string (reverse temp-values)) state) tokens))
+          (if (empty? token-values) ; When the token-values list is empty it's because the last state is not a token
+            (reverse tokens) ; Last state is not added to the tokens list
+            (reverse (cons (list (list->string (reverse token-values)) state) tokens)) ; Last state is added to the tokens list
           )
-          #f)]
+          #f)] ; The last state is not an accepted state
+
       [else 
         (let-values 
-          ([ (new-state token-found save-value) ((dfa-func dfa-to-evaluate) state (car chars)) ]) ; Call the transition function and fet the new state and whether or not a token was found
+
+          ; Call the transition function and fet the new state, whether or not a token was found and if the value should be saved or not
+          ([ (new-state token-found save-value) ((dfa-func dfa-to-evaluate) state (car chars)) ])
+
           (loop 
             (cdr chars)
             new-state
-            (if token-found ; The new list of tokens
-              (cons (list (list->string (reverse temp-values)) token-found) tokens)
-              tokens)
+            (if token-found
+              (cons (list (list->string (reverse token-values)) token-found) tokens) ; Add the new token to the tokens list
+              tokens) ; Don't modify the tokens list
             (if save-value
               (if token-found
-                (list (car chars))
-                (cons (car chars) temp-values)
-              )
-              '()
-            )
-            ))])))
+                (list (car chars)) ; Reset the token-values list with the next token initial value
+                (cons (car chars) token-values)) ; The token isn't finished so the value is added to the list
+              '() ; The value is not of a token so it isn't saved
+            )))])))
 
 ; DFA
 (define (delta-arithmetic initial-state accept-states)
@@ -166,8 +170,6 @@
 
 (define (arithmetic-lexer string-to-evaluate)
     (evaluate-dfa (dfa delta-arithmetic 'start '(int float exp var space par_close)) string-to-evaluate))
-
-
 
 #|
     Programming a DFA
