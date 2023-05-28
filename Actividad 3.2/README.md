@@ -19,3 +19,7 @@ Testing: arithmetic-lexer
 ```
 
 Cómo se puede ver todas las pruebas salen exitosas, comprobando que el código funciona correctamente.
+
+Autómata:
+
+![Alt Text](automata_act3-2.png)
