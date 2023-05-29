@@ -71,7 +71,7 @@ $$\rightarrow \frac{(k+1)^2((k+1)+1)^2}{4} = \frac{(k+1)^2((k+1)+1)^2}{4}$$
 $$\square$$
 
 3.  Using the tree below, give the values of each of the items:
-    ![Tree image](sample_tree.png)
+    ![Tree image](../Assets/sample_tree.png)
 
         a. the depth of the tree
 

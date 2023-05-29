@@ -1,66 +1,9 @@
-#| 
-Functions to convert between temperatures units
-(Celsius and Farenheit)
-|#
-
 #lang racket
 
-(require racket/trace) ; Es necesario para poder usar el 'trace'
-
 (provide (all-defined-out)) ; Provee todas las funciones
+(require racket/trace) ; Es necesario para poder usar el 'trace' que sirve para poder ver el proceso que ha hecho una función
 
-; Give a name to a value. A "variable"
-(define data 46.7)
-
-(define (C->F celsius)
-  (+ (* celsius (/ 9 5.0)) 32)
-)
-
-(define (F->C farenheit)
-  (* (- farenheit 32) (/ 5 9.0))
-)
-(define (areaCirculo r)
-  (* pi r r)
-)
-
-(define (perimetroCirculo r)
-  (* pi r 2)
-)
-
-(define (areaTriangulo b h)
-  (/ (* b h) 2.0)
-)
-
-; Año bisiesto
-(define (leap year)
-  (and 
-    (= 0 (remainder year 4)) ; 'remainder' es el residuo, ya viene en Racket
-    (or 
-      (not (= 0 (remainder year 100)))
-      (= 0 (remainder year 400))
-    )
-  )
-)
-
-; Días de los meses con año bisiesto
-(define (monthDays month year)
-  (case month
-    [(4 6 9 11) 30]
-    [(2) (if (leap year) 29 28)]
-    [else 31]
-  )
-)
-
-(define (nextDay day month year)
-  (if (= day (monthDays month year))
-    (if (= 12 month)
-      (list 1 1 (add1 year)) ; último mes del año
-      (list 1 (add1 month) year) ; último día del mes
-    )
-    (list (add1 day) month year)
-  )
-)
-
+; Suma todos los digitos de un número
 (define (sumDigits n)
   (if (zero? n)
     0
@@ -70,8 +13,11 @@ Functions to convert between temperatures units
     )
   )
 )
-(trace sumDigits)
+(trace sumDigits) ; Poder ver el proceso que hace la función
 
+; Hacer misma función recursiva pero ahora con "cola"
+; Esto es para que la función vaya guardando en una variable el resultado y así no tengo que
+; "entrar" y "salir" de la función, sino que sólo entra, lo que acorta el tiempo de procesado
 (define (tailSumDigits num)
 
   (define (loop num res)
@@ -87,6 +33,7 @@ Functions to convert between temperatures units
 
 )
 
+; Factorial de un número
 (define (! n)
   (if (zero? n)
     1
@@ -95,7 +42,7 @@ Functions to convert between temperatures units
 )
 (trace !)
 
-; Using Tail Recursion
+; Using tail recursion
 (define (tail! n)
   ; Define an internal function
   (define (doTail! n a)

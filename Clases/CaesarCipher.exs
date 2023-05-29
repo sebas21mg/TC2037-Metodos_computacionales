@@ -52,5 +52,5 @@ defmodule FileIO do
 
 end
 
-IO.puts(FileIO.char_shift('c', 4))
-IO.puts(FileIO.line_shift("Hello", 4))
+IO.puts(FileIO.char_shift("c", 4))
+# IO.puts(FileIO.line_shift("Hello", 4))

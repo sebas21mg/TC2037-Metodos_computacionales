@@ -1,4 +1,35 @@
+; Clase 20 - 02 - 23
+
+; To be able to use the language
 #lang racket
+
+; Display something
+(display "Hello world!\n")
+
+; Make operation or functions
+(+ 3 5)
+
+; Nested operations
+(- 1 (* 8 4))
+
+; Lists
+(range 1 9)
+
+; Sum of the list elements
+(apply + (range 1 9))
+
+; Syntax for arithmetic operations
+(println (- (* 3 6) (/ 4 3.0)))
+
+; Define a variable
+(define data 46.7)
+
+; Condicional
+(if (> 5 1)
+  #t
+  #f)
+
+; - Listas
 
 '(3,6) ;la comilla es para que no llame a ninguna función, para definir algo literalmente
 
