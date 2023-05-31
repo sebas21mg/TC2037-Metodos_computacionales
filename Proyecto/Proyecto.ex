@@ -12,8 +12,16 @@ defmodule FileIO do
   end
 
   def replace(string) do
-    Regex.replace(~r/(def|return|print|str)/, string, "<span style='color: blue;'>\\0</span>")
-    Regex.replace(~r/\w+/, string, "<span style='color: orange;'>\\0</span>")
+    cond do
+      Regex.match?(~r/(def|return|print|str)/, string) -> Regex.replace(~r/(def|return|print|str)/, string, "<span style='color: blue;'>\\0</span>")
+      Regex.match?(~r/\w+/, string) -> Regex.replace(~r/\w+/, string, "<span style='color: orange;'>\\0</span>")
+      true -> string
+    end
+
+    # Regex.replace(~r/\w+/, string, "<span style='color: orange;'>\\0</span>")
+    # Regex.replace(~r/(def|return|print|str)/, string, "<span style='color: blue;'>\\0</span>")
+    # Regex.replace(~r/\w+/, string, "<span style='color: orange;'>\\0</span>")
+    # Regex.replace(~r/(def|return|print|str)/, string, "<span style='color: blue;'>\\0</span>")
   end
 
   def lineSplit(line) do
