@@ -2,11 +2,11 @@
 
 ## Template
 
-**I. Basis:** $u \in \N$
+**I. Basis:** $0 \in \N$
 
-**II. Recursive step:** if $n \in \N$, then $s(n) \in \N$, where $s(n) = n + 1$
+**II. Recursive step:** if $n \in \N$ then $s(n) \in \N$, where $s(n) = n + 1$
 
-**III. Closure:** $n \in \N$ only if it can be obtained from $u$ by a finite number of applications of the operation $s$
+**III. Closure:** $n \in \N$ only if it can be obtained from $0$ by a finite number of applications of the operation $s$
 
 ## Example 1: Recursive definition of Factorial
 
