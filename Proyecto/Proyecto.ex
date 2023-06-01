@@ -74,4 +74,5 @@ defmodule SyntaxHighlighter do
 
 end
 
+# Execute the program. Change the py file to make the test with another file
 SyntaxHighlighter.highlightSyntax('prueba3.py', 'index.html')
