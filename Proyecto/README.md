@@ -13,7 +13,9 @@ Para ejecutar el código solo ocupamos ejecutar la siguiente línea en la termin
 
 En este caso nosotros los probamos con unos códigos de prueba, teniendo cómo resultados los siguientes:
 
-
+![Captura 1](captura1.png)
+![Captura 2](captura2.png)
+![Captura 3](captura3.png)
 
 6. Reflexiona sobre la solución planteada, los algoritmos implementados y sobre el tiempo de ejecución de estos.
 
@@ -27,9 +29,9 @@ Tratamos de que el tiempo de ejecución fuese lo más rápido posible, y sobre t
 
 Se presentara la complejidad del código y para poder determinar esta lo iremos haciendo función por función.
 
-#### Función "classes"
+#### Función "regexes"
 ```elixir
-def classes do
+def regexes do
     [
       [~r/^(#.*)/, "comentario"],
       [~r/^("(.*?)"|'(.*?)')/, "cadena-texto"],
@@ -46,40 +48,40 @@ La complejidad de esta función es O(1), pues no hay bucles ni operaciones que d
 Tomando la complejidad más grande podemos decir que su complejidad es de: 
 $$O(1)$$
 
-#### Función "replaceLine" y "do_replace_line"
+#### Función "highlightLine" y "do_highlightLine"
 ```elixir
-def replaceLine(line), do: do_replaceLine(line, "", classes(), classes())
+def highlightLine(line), do: do_highlightLine(line, "", classes(), classes())
 
-  defp do_replaceLine("", newLine, _, _), do: newLine
+  defp do_highlightLine("", newLine, _, _), do: newLine
 
-  defp do_replaceLine(line, newLine, [], classes), do: do_replaceLine(
+  defp do_highlightLine(line, newLine, [], classes), do: do_highlightLine(
     Regex.replace(~r/^(.|\n)/, line, ""), 
     newLine <> Enum.at( Regex.run(~r/^(.|\n)/, line) , 0), 
     classes, 
     classes)
 
-  defp do_replaceLine(line, newLine, [head | tail], classes) do
+  defp do_highlightLine(line, newLine, [head | tail], classes) do
     regex = Enum.at(head, 0)
     class = Enum.at(head, 1)
 
     if Regex.match?(regex, line) do
       newLine = newLine <> "<span class='"<> class <> "'>" <> Enum.at(Regex.run(regex, line), 0) <> "</span>"
       line = Regex.replace(regex, line, "") 
-      do_replaceLine(line, newLine, classes, classes)
+      do_highlightLine(line, newLine, classes, classes)
 
     else
-      do_replaceLine(line, newLine, tail, classes)
+      do_highlightLine(line, newLine, tail, classes)
 
     end
   end
 ```
-La función "replaceLine" solo llama a la función "do_replaceLine", por lo que su complejidad depende de la complejodad de "do_replaceLine".
+La función "highlightLine" solo llama a la función "do_highlightLine", por lo que su complejidad depende de la complejodad de "do_highlightLine".
 
-La función "do_replaceLine("", newLine, _, _)" es un caso base para detener la recursión cunado la línea de entrada esté vacía. No se realiza ninguna operación adicional, por lo que su complejidad es constante O(1).
+La función "do_highlightLine("", newLine, _, _)" es un caso base para detener la recursión cunado la línea de entrada esté vacía. No se realiza ninguna operación adicional, por lo que su complejidad es constante O(1).
 
-La función "do_replaceLine(line, newLine, [], classes)" reemplaza el primer carácter de la línea de entrada y se agrega al primer grupo coincidente a la nueva línea. Posteriormente se realiza una llamada recursiva a la función do_replaceLine con los mismos argumentos. La complejidad de esta igual es constante O(1), pues no depende del tamaño de linea o del numero de clases.
+La función "do_highlightLine(line, newLine, [], classes)" reemplaza el primer carácter de la línea de entrada y se agrega al primer grupo coincidente a la nueva línea. Posteriormente se realiza una llamada recursiva a la función do_highlightLine con los mismos argumentos. La complejidad de esta igual es constante O(1), pues no depende del tamaño de linea o del numero de clases.
 
-La función "do_replaceLine(line, newLine, [head | tail], classes)" verifica si hay un patron en la búsqueda y la línea de entrada, si es que llega a existir se agrega la parte coincidente a la nueva línea y se realiza el reemplazo en la línea original. Posteriormente se hace una llamada recursiva a la función con los mismos argumentos, con la excepción de que se pasa la cola (tail) en lugar del primer elemento. En este caso la complejidad de esta función depende del número de clases que hay en la función "classes", pues esta realizará una iteración por cada clase, por lo que la complejidad será lineal O(n).
+La función "do_highlightLine(line, newLine, [head | tail], classes)" verifica si hay un patron en la búsqueda y la línea de entrada, si es que llega a existir se agrega la parte coincidente a la nueva línea y se realiza el reemplazo en la línea original. Posteriormente se hace una llamada recursiva a la función con los mismos argumentos, con la excepción de que se pasa la cola (tail) en lugar del primer elemento. En este caso la complejidad de esta función depende del número de clases que hay en la función "classes", pues esta realizará una iteración por cada clase, por lo que la complejidad será lineal O(n).
 
 Tomando la complejidad más grande podemos decir que su complejidad es de: 
 $$O(n)$$
@@ -88,18 +90,18 @@ $$O(n)$$
 
 ```elixir
 def highlightSyntax(inFilePath, outFilePath) do
-    fileName = inFilePath |> Path.basename()
+    title = inFilePath |> Path.basename() # Get the file name
 
-    fileContent = inFilePath 
-      |> File.stream!() # Tomar las líneas del archivo
-      |> Enum.map(&replaceLine(&1)) # Hacer el cifrado
-      |> Enum.join("") # Juntar todas las líneas
+    body = inFilePath 
+      |> File.stream!() # Get every line of the document
+      |> Enum.map(&highlightLine(&1)) # Make the syntak highlight in every line
+      |> Enum.join("") # Join them
 
-    File.write(outFilePath, Enum.join([@htmlBeforeTitle, fileName, @htmlAfterTitle, fileContent, @htmlEnd]))
+    File.write(outFilePath, Enum.join([@htmlBeforeTitle, title, @htmlAfterTitle, body, @htmlEnd])) # Write the file
   end
 ```
 Esta función primero lee el archivo de entrada línea por línea, esto tiene una complejidad lineal O(m) pues depende del tamaño del archivo, donde "m" es la cantidad de líneas en el archivo.
-Luego aplica la función "replaceLine" a cada línea del archivo, su complejidad depende de la cantidad total de líneas del archivo y de la complejidad de "replaceLine", la cuál es O(n).
+Luego aplica la función "highlightLine" a cada línea del archivo, su complejidad depende de la cantidad total de líneas del archivo y de la complejidad de "highlightLine", la cuál es O(n).
 Posteriormente une todas las líneas del archivo en una sola cadena, donde tiene una complejidad de O(k), donde "k" es la longitud total del contenido.
 Por último, escribe el contenido en el archivo de salida, su complejidad nuevamente depende del tamaño del contenido, donde "k" es la longitud total del contenido.
 
