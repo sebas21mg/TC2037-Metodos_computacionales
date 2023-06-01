@@ -1,0 +1,26 @@
+body {
+  font-family: monospace;
+  background-color: #2a2a3a;
+  color: #fff;
+  padding: 5vh 5%;
+}
+
+.palabras-reservada {
+  color: #3d5afe;
+}
+
+.signo {
+  color: #00e5ff;
+}
+
+.variable {
+  color: hsl(90, 100%, 48%);
+}
+
+.funcion {
+  color: red;
+}
+
+.cadena-texto {
+  color: green;
+}
