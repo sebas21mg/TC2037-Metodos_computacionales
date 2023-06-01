@@ -9,14 +9,13 @@ defmodule FileIO do
 
   def classes do
     [
-      [~r/^(".+"|'.+')/, "cadena-texto"],
-      [~r/^(def|return)/, "palabras-reservada"], 
-      [~r/^(def|return)/, "palabras-reservada"], 
-      # ~r/^(\+|\(|\)|\")/,
-      [~r/^(\+)/, "signo"], 
+      [~r/^(#.*)/, "comentario"],
+      [~r/^("(.*?)"|'(.*?)')/, "cadena-texto"],
+      [~r/^(\+|\-|\*|\/|\%|\=|\<|\>|\^)/, "signo"], 
+      [~r/^(\(|\)|\[|\]|\{|\})/, "parentesis"], 
+      [~r/^(def|return|import|for|if|in|row|with|while|elif|else)/, "palabras-reservada"], 
       [~r/^([\w_]+)\s*(?=\()/, "funcion"], 
       [~r/^([\w_]+)/, "variable"]
-      # [~r/^( )+/, "orange"] 
     ]
   end
 
@@ -34,7 +33,6 @@ defmodule FileIO do
     regex = Enum.at(head, 0)
     class = Enum.at(head, 1)
 
-      # IO.puts(line)
     if Regex.match?(regex, line) do
       newLine = newLine <> "<span class='"<> class <> "'>" <> Enum.at(Regex.run(regex, line), 0) <> "</span>"
       line = Regex.replace(regex, line, "") 
@@ -59,9 +57,4 @@ defmodule FileIO do
 
 end
 
-FileIO.highlightSyntax('./Suma.py', './index.html')
-
-# IO.puts(FileIO.replaceLine("print(Hola mundo)"))
-# FileIO.prueba()
-# IO.inspect(FileIO.classes())
-# FileIO.regexPruebas("fruechor")
+FileIO.highlightSyntax('Suma.py', 'index.html')

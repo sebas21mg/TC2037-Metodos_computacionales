@@ -6,21 +6,29 @@ body {
 }
 
 .palabras-reservada {
-  color: #3d5afe;
+  color: hsl(33, 90%, 58%);
 }
 
 .signo {
-  color: #00e5ff;
+  color: hsl(270, 90%, 58%);
 }
 
 .variable {
-  color: hsl(90, 100%, 48%);
+  color: hsl(222, 90%, 58%);
 }
 
 .funcion {
-  color: red;
+  color: hsl(4, 90%, 58%);
 }
 
 .cadena-texto {
-  color: green;
+  color: hsl(120, 90%, 58%);
+}
+
+.comentario {
+  color: hsl(0, 0%, 49%);
+}
+
+.parentesis {
+  color: hsl(319, 90%, 58%);
 }
