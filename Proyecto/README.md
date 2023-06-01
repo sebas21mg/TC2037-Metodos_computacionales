@@ -1,9 +1,17 @@
-# Resaltador de Sintaxis
+# <center>Resaltador de Sintaxis</center>
 
-#### Sebastian Enrique Moncada González - A01027028
-#### Samuel Roberto Acevedo Sandoval - A01026893
+![Logo Tec](logoTec.png)
 
-- Cómo se ejecuta el código
+#### <center>Sebastian Enrique Moncada González - A01027028 </center>
+#### <center>Samuel Roberto Acevedo Sandoval - A01026893 </center>
+
+## <center>Materia: Implementación a métodos computacionales</center>
+
+#### <center>Profesor: Gilberto Echeverria Furió</center>
+
+## <center>31 de mayo 2023</center>
+
+## Cómo ejecutarlo y ejemplos de ejecución
 
 Para ejecutar el código solo ocupamos ejecutar la siguiente línea en la terminal (dento de la carpeta donde estén los archivos):
 
@@ -17,7 +25,14 @@ En este caso nosotros los probamos con unos códigos de prueba, teniendo cómo r
 ![Captura 2](captura2.png)
 ![Captura 3](captura3.png)
 
-6. Reflexiona sobre la solución planteada, los algoritmos implementados y sobre el tiempo de ejecución de estos.
+En dado caso que se quisiese probar con un archivo diferente se puede cambiar directamente en el documento, en la parte de hasta abajo la línea siguiente:
+```elixir
+SyntaxHighlighter.highlightSyntax('<nombreDelArchivo>.py', 'index.html')
+```
+
+Asegurese que este archivo se encuentre en el mismo folder que el archivo ".ex", si no ponder la ruta deseada para encontrar el archivo.
+
+## Reflexiones sobre la solución planteada y los algoritmos implementados
 
 Pensar en cómo realizar el resaltador de sintaxis fue un verdadero reto, pues tuvimos que juntar muchas de las cosas que hemos aprendido a lo largo del semestre y unirlas para poder llegar al resultado esperado, teniendo en cuenta los requerimientos que se pidieron y realizandolos de manera exitosa.
 
@@ -25,7 +40,7 @@ La solución final presentada tiene mucho de lo visto en este semestre, teniendo
 
 Tratamos de que el tiempo de ejecución fuese lo más rápido posible, y sobre tratamos de adaptar el código más a esto, econtrandonos con varias dificultades pero así teniendo un código más óptimo y eficiente.
 
-7. Calcula la complejidad de tu algoritmo basada en el número de iteraciones y contrástala con el tiempo estimado en el punto anterior.
+## Complejidad del algoritmo
 
 Se presentara la complejidad del código y para poder determinar esta lo iremos haciendo función por función.
 
@@ -113,7 +128,7 @@ Para determinar la complejidad total del código agarramos la complejidad más a
 $$O(m*n + 2k)$$
 Siendo esta nuestra complejidad para el código.
 
-8. Plasma en un breve reporte de una página (en formato Markdown) las conclusiones de tu reflexión en los puntos 6 y 7. Agrega además una breve reflexión sobre las implicaciones éticas que el tipo de tecnología que desarrollaste pudiera tener en la sociedad.
+## Conclusiones y reflexión
 
 La solución planteada para el resaltador de sintaxis fue un desafío interesante y nos dio la oportunidad de aplicar varios conceptos aprendidos. Principalmente logramos combinar efectivamente diferentes elementos, cómo la recursividad y las expresiones regulares, llegando al resultado esperado.
 
