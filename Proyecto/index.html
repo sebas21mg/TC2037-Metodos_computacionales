@@ -9,101 +9,14 @@
 </head>
 <body>
 <pre>
-# <span class='variable'>In</span> <span class='variable'>this</span> <span class='variable'>activity</span> <span class='variable'>I</span> <span class='variable'>promise</span> <span class='variable'>to</span> <span class='variable'>apply</span> <span class='variable'>my</span> <span class='variable'>knowledge</span>, <span class='variable'>to</span> <span class='variable'>make</span> <span class='variable'>an</span> <span class='variable'>effort</span> <span class='variable'>in</span> <span class='variable'>its</span> <span class='variable'>development</span> <span class='variable'>and</span> <span class='variable'>not</span> <span class='variable'>to</span> <span class='variable'>use</span> <span class='variable'>unauthorized</span> <span class='variable'>or</span> <span class='variable'>illegal</span> <span class='variable'>means</span> <span class='variable'>to</span> <span class='variable'>carry</span> <span class='variable'>it</span> <span class='variable'>out</span>.
-# <span class='variable'>Samuel</span> <span class='variable'>Acevedo</span>
-# <span class='variable'>October</span> <span class='variable'>20th</span> <span class='variable'>2021</span>
+<span class='funcion'>print</span><span class='parentesis'>(</span><span class='cadena-texto'>"Hola"</span> <span class='signo'>+</span> <span class='cadena-texto'>"mundo"</span><span class='parentesis'>)</span>
 
-<span class='variable'>import</span> <span class='variable'>csv</span>
+<span class='palabras-reservada'>def</span> <span class='funcion'>suma</span><span class='parentesis'>(</span><span class='variable'>a</span>, <span class='variable'>b</span><span class='parentesis'>)</span>:
+  <span class='palabras-reservada'>return</span> <span class='variable'>a</span> <span class='signo'>+</span> <span class='variable'>b</span> <span class='comentario'># chueorlh ureohlc ureochl uoe</span>
+<span class='comentario'>#rchleruo hlu eroclhu eor</span>
 
-<span class='palabras-reservada'>def</span> <span class='funcion'>read_data</span>(<span class='variable'>filename</span>):
-    <span class='variable'>data</span> = []
-    <span class='variable'>with</span> <span class='funcion'>open</span>(<span class='variable'>filename</span>, <span class='variable'>newline</span>='') <span class='variable'>as</span> <span class='variable'>file_data</span>:
-        <span class='variable'>csv_reader</span> = <span class='variable'>csv</span>.<span class='funcion'>reader</span>(<span class='variable'>file_data</span>)
-        <span class='variable'>for</span> <span class='variable'>line</span> <span class='variable'>in</span> <span class='variable'>csv_reader</span>:
-            <span class='variable'>data</span>.<span class='funcion'>append</span>(<span class='variable'>line</span>)
-    <span class='palabras-reservada'>return</span> <span class='variable'>data</span>
+<span class='funcion'>print</span><span class='parentesis'>(</span><span class='cadena-texto'>"La suma    de los números es: "</span> <span class='signo'>+</span> <span class='funcion'>str</span><span class='parentesis'>(</span><span class='funcion'>suma</span><span class='parentesis'>(</span><span class='variable'>7</span>, <span class='variable'>2</span><span class='parentesis'>)</span><span class='parentesis'>)</span><span class='parentesis'>)</span>
 
-<span class='palabras-reservada'>def</span> <span class='funcion'>write_data</span>(<span class='variable'>data</span>, <span class='variable'>filename</span>):
-    <span class='variable'>with</span> <span class='funcion'>open</span>(<span class='variable'>filename</span>, <span class='cadena-texto'>"w"</span>, <span class='variable'>newline</span>='') <span class='variable'>as</span> <span class='variable'>file_ref</span>:
-        <span class='variable'>csv_writer</span> = <span class='variable'>csv</span>.<span class='funcion'>writer</span>(<span class='variable'>file_ref</span>)
-        <span class='variable'>for</span> <span class='variable'>row</span> <span class='variable'>in</span> <span class='variable'>data</span>:
-            <span class='variable'>csv_writer</span>.<span class='funcion'>writerow</span>(<span class='variable'>row</span>)
-
-<span class='palabras-reservada'>def</span> <span class='funcion'>convert_to_int</span>(<span class='variable'>data</span>):
-    <span class='variable'>for</span> <span class='variable'>row</span> <span class='variable'>in</span> <span class='variable'>data</span>[<span class='variable'>1</span>:]:
-        <span class='variable'>row</span>[<span class='variable'>2</span>] = <span class='funcion'>int</span>(<span class='variable'>row</span>[<span class='variable'>2</span>])
-        <span class='variable'>row</span>[<span class='variable'>3</span>] = <span class='funcion'>int</span>(<span class='variable'>row</span>[<span class='variable'>3</span>])
-
-<span class='palabras-reservada'>def</span> <span class='funcion'>print_matrix</span>(<span class='variable'>matrix</span>):
-    <span class='variable'>for</span> <span class='variable'>row</span> <span class='variable'>in</span> <span class='variable'>matrix</span>:
-        <span class='variable'>line</span> = ""
-        <span class='variable'>for</span> <span class='variable'>item</span> <span class='variable'>in</span> <span class='variable'>row</span>:
-            <span class='variable'>line</span> = <span class='variable'>line</span> <span class='signo'>+</span> <span class='variable'>f</span><span class='cadena-texto'>"{item:12} "</span>
-        <span class='funcion'>print</span>(<span class='variable'>line</span>)      
-        
-<span class='palabras-reservada'>def</span> <span class='funcion'>quit_stamps</span>(<span class='variable'>data</span>):
-    <span class='variable'>for</span> <span class='variable'>row</span> <span class='variable'>in</span> <span class='variable'>data</span>[<span class='variable'>1</span>:]:
-        <span class='variable'>while</span> <span class='variable'>row</span>[<span class='variable'>2</span>] >= <span class='variable'>5</span>:
-            <span class='variable'>row</span>[<span class='variable'>2</span>] = <span class='variable'>row</span>[<span class='variable'>2</span>] - <span class='variable'>5</span>
-            <span class='variable'>row</span>[<span class='variable'>3</span>] = <span class='variable'>row</span>[<span class='variable'>3</span>] <span class='signo'>+</span> <span class='variable'>10</span>
-            
-<span class='palabras-reservada'>def</span> <span class='funcion'>exchange_columns</span>(<span class='variable'>data</span>):
-    <span class='variable'>for</span> <span class='variable'>row</span> <span class='variable'>in</span> <span class='variable'>data</span>[<span class='variable'>0</span>:]:
-        <span class='variable'>row_0</span> = <span class='variable'>row</span>[<span class='variable'>0</span>]
-        <span class='variable'>row_1</span> = <span class='variable'>row</span>[<span class='variable'>1</span>]
-        <span class='variable'>row</span>[<span class='variable'>0</span>] = <span class='variable'>row_1</span>
-        <span class='variable'>row</span>[<span class='variable'>1</span>] = <span class='variable'>row_0</span>
-
-<span class='palabras-reservada'>def</span> <span class='funcion'>discount_2</span>(<span class='variable'>filename</span>):
-    <span class='variable'>filename</span> = <span class='cadena-texto'>"discount_cards_2.csv"</span>
-    <span class='variable'>data</span> = <span class='funcion'>read_data</span>(<span class='variable'>filename</span>)
-    <span class='funcion'>convert_to_int</span>(<span class='variable'>data</span>)
-
-    <span class='variable'>columns</span> = <span class='funcion'>exchange_columns</span>(<span class='variable'>data</span>)
-    <span class='variable'>stamps</span> = <span class='funcion'>quit_stamps</span>(<span class='variable'>data</span>)
-    <span class='funcion'>print</span>(<span class='funcion'>print_matrix</span>(<span class='variable'>data</span>))
-
-    <span class='variable'>archive</span> = <span class='funcion'>open</span>(<span class='cadena-texto'>"ok_discount_cards_2.csv","w"</span>)
-    <span class='variable'>i</span> = <span class='variable'>0</span>
-    <span class='variable'>for</span> <span class='variable'>index</span> <span class='variable'>in</span> <span class='funcion'>range</span>(<span class='funcion'>len</span>(<span class='variable'>data</span>)):
-        <span class='variable'>index</span> = <span class='funcion'>str</span>(<span class='variable'>data</span>[<span class='variable'>i</span>])
-        <span class='variable'>archive</span>.<span class='funcion'>write</span>(<span class='funcion'>str</span>(<span class='variable'>index</span>[<span class='variable'>1</span>:-<span class='variable'>1</span>]))
-        <span class='variable'>archive</span>.<span class='funcion'>write</span>(<span class='cadena-texto'>"\n"</span>)
-        <span class='variable'>i</span> <span class='signo'>+</span>= <span class='variable'>1</span>
-    <span class='variable'>archive</span>.<span class='funcion'>close</span>()
-    <span class='palabras-reservada'>return</span> <span class='variable'>filename</span>
-
-<span class='palabras-reservada'>def</span> <span class='funcion'>discount_1</span>(<span class='variable'>filename</span>):
-    <span class='variable'>filename</span> = <span class='cadena-texto'>"discount_cards_1.csv"</span>
-    <span class='variable'>data</span> = <span class='funcion'>read_data</span>(<span class='variable'>filename</span>)
-    <span class='funcion'>convert_to_int</span>(<span class='variable'>data</span>)
-
-    <span class='variable'>columns</span> = <span class='funcion'>exchange_columns</span>(<span class='variable'>data</span>)
-    <span class='variable'>stamps</span> = <span class='funcion'>quit_stamps</span>(<span class='variable'>data</span>)
-    <span class='funcion'>print</span>(<span class='funcion'>print_matrix</span>(<span class='variable'>data</span>))
-
-    <span class='variable'>archive</span> = <span class='funcion'>open</span>(<span class='cadena-texto'>"ok_discount_cards_1.csv","w"</span>)
-    <span class='variable'>i</span> = <span class='variable'>0</span>
-    <span class='variable'>for</span> <span class='variable'>index</span> <span class='variable'>in</span> <span class='funcion'>range</span>(<span class='funcion'>len</span>(<span class='variable'>data</span>)):
-        <span class='variable'>index</span> = <span class='funcion'>str</span>(<span class='variable'>data</span>[<span class='variable'>i</span>])
-        <span class='variable'>archive</span>.<span class='funcion'>write</span>(<span class='funcion'>str</span>(<span class='variable'>index</span>[<span class='variable'>1</span>:-<span class='variable'>1</span>]))
-        <span class='variable'>archive</span>.<span class='funcion'>write</span>(<span class='cadena-texto'>"\n"</span>)
-        <span class='variable'>i</span> <span class='signo'>+</span>= <span class='variable'>1</span>
-    <span class='variable'>archive</span>.<span class='funcion'>close</span>()
-    <span class='palabras-reservada'>return</span> <span class='variable'>filename</span>
-
-<span class='variable'>answer</span> = <span class='cadena-texto'>"y"</span>
-<span class='variable'>while</span> <span class='variable'>answer</span> == <span class='cadena-texto'>"y"</span>:
-    <span class='variable'>question_user</span> = <span class='funcion'>input</span>(<span class='cadena-texto'>"Which file do you want to be shown?: (1/2)\n"</span>)
-    <span class='variable'>if</span> <span class='variable'>question_user</span> == <span class='cadena-texto'>"1"</span>:
-        <span class='variable'>show_discount_1</span> = <span class='funcion'>discount_1</span>(<span class='variable'>question_user</span>)
-    <span class='variable'>elif</span> <span class='variable'>question_user</span> == <span class='cadena-texto'>"2"</span>:
-        <span class='variable'>show_discount_2</span> = <span class='funcion'>discount_2</span>(<span class='variable'>question_user</span>)
-    <span class='variable'>else</span>:
-        <span class='funcion'>print</span>(<span class='cadena-texto'>"Incorrect input, Try Again"</span>)
-        
-    <span class='variable'>answer</span> = <span class='funcion'>input</span>(<span class='cadena-texto'>"Again ([y] / n)?: "</span>)
-<span class='funcion'>print</span>(<span class='cadena-texto'>"Thank you four using this program \nHope this one was useful for you!"</span>)
 </pre>
 </body>
 </html>
