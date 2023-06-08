@@ -1,0 +1,42 @@
+# Sebastian Moncada
+# Samuel Acevedo
+
+name: ejercicio 2
+source code: |-
+  input: '1001'
+  blank: ' '
+  start state: Start
+
+  table:
+    Start:
+      '#': {R: 'Ok'}
+      '1': {write: '#', R: 'Find1R'}
+      '0': {write: '#', R: 'Find0R'}
+    Find1R:
+      [' ', '#']: {L: 'Find1L'}
+      ['1', '0'] : R
+    Find0R:
+      [' ', '#']: {L: 'Find0L'}
+      ['1', '0'] : R
+    Find1L:
+      '1': {write: '#', L: 'Checking1&0'} 
+      ['0', ' ']: {R: 'No'}
+      '#': {L: 'No'}
+    Find0L:
+      '0': {write: '#', L: 'Checking1&0'} 
+      ['1', ' ']: {R: 'No'}
+      '#': {L: 'No'}
+    Checking1&0:
+      '#': {R: 'Start'}
+      ['1', '0'] : L
+    Ok:
+    No:
+positions:
+  Start: { x: 409.42, y: 275.92, fixed: false }
+  Find1R: { x: 553.76, y: 265.3, fixed: false }
+  Find0R: { x: 481.26, y: 138.55, fixed: false }
+  Find1L: { x: 416.12, y: 205.01, fixed: false }
+  Find0L: { x: 338.37, y: 109.19, fixed: false }
+  Checking1&0: { x: 263.73, y: 221.11, fixed: false }
+  Ok: { x: 419.52, y: 421.15, fixed: false }
+  No: { x: 292.32, y: 263.04, fixed: false }

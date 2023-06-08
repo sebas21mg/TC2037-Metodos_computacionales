@@ -1,0 +1,42 @@
+# Sebastian Moncada
+# Samuel Acevedo
+
+name: ejercicio 1
+source code: |-
+  input: '0001100'
+  blank: ' '
+  start state: Start
+  table:
+    Start:
+      0: {write: 'X', R: Find1R}
+      Y: {R: No}
+    Find1R:
+      [0,Y]: R
+      1: {write: 'Y', R: Find0R}
+    Find0R:
+      [1,X]: R
+      0: {write: 'X', L: Find1L}
+    Find1L:
+      [X,Y]: L
+      1: {L: Find0L}
+      ' ': {R: CheckOk}
+      0: {R: No}
+    Find0L:
+      [0,Y,1]: L
+      ' ': {L: No}
+      X: {R: Start}
+    CheckOk:
+      [X,Y]: R
+      ' ': {R: Ok}
+      0: {R: No}
+    Ok:
+    No:
+positions:
+  Start: { x: 515.91, y: 262.63, fixed: false }
+  Find1R: { x: 566.83, y: 133.15, fixed: false }
+  Find0R: { x: 434.03, y: 199.98, fixed: false }
+  Find1L: { x: 289.65, y: 162.55, fixed: false }
+  Find0L: { x: 428.26, y: 135.66, fixed: false }
+  CheckOk: { x: 232.86, y: 293.94, fixed: false }
+  Ok: { x: 261.76, y: 433.94, fixed: false }
+  No: { x: 374.78, y: 277.27, fixed: false }

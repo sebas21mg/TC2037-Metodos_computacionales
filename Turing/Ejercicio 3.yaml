@@ -1,0 +1,38 @@
+# Sebastian Moncada
+# Samuel Acevedo
+
+name: ejercicio 3
+source code: |-
+  input: '11111-11'
+  blank: ' '
+  start state: Start
+  table:
+    Start:
+      '-': {R: Find1R}
+      ' ': {R: No}
+      1: R
+    Find1R:
+      1: R
+      ' ': {L: Find1L}
+    Find1L:
+      '-': {write: ' ', L: Ok}
+      1: {write: ' ', L: Check1R}
+    Check1R:
+      1: L
+      '-': {L: Check1L}
+    Check1L:
+      ' ': {write: ' ', R: ReStart}
+      1: L
+    ReStart:
+      1: {write: ' ', R: Start}
+    Ok:
+    No:
+positions:
+  Start: { x: 456.24, y: 266.74, fixed: false }
+  Find1R: { x: 561.69, y: 175.02, fixed: false }
+  Find1L: { x: 407.61, y: 184.41, fixed: false }
+  Check1R: { x: 260.42, y: 167.61, fixed: false }
+  Check1L: { x: 215.46, y: 305.09, fixed: false }
+  ReStart: { x: 346.38, y: 366.84, fixed: false }
+  Ok: { x: 467.31, y: 327.69, fixed: false }
+  No: { x: 466.45, y: 118.05, fixed: false }
