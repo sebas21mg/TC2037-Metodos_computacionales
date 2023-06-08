@@ -45,12 +45,14 @@ defmodule SyntaxHighlighter do
 
     # When the first element of the original line matches with the regex
     if Regex.match?(regex, line) do
-      # The element is added to the new line with its respective class
-      newLine = newLine <> "<span class='"<> class <> "'>" <> Enum.at(Regex.run(regex, line), 0) <> "</span>"
-      # The element is deleted from the original line
-      line = Regex.replace(regex, line, "") 
-      # The regexes list is reloaded
-      do_highlightLine(line, newLine, regexes, regexes)
+      do_highlightLine(
+        # The element is deleted from the original line
+        Regex.replace(regex, line, ""), 
+        # The element is added to the new line with its respective class
+        newLine <> "<span class='"<> class <> "'>" <> Enum.at(Regex.run(regex, line), 0) <> "</span>", 
+        # The regexes list is reloaded
+        regexes, 
+        regexes)
 
     # When the first element of the original line doesn't match with the current regex of the regexes list
     else
@@ -75,4 +77,4 @@ defmodule SyntaxHighlighter do
 end
 
 # Execute the program. Change the py file to make the test with another file
-SyntaxHighlighter.highlightSyntax('prueba3.py', 'index.html')
+SyntaxHighlighter.highlightSyntax('FuerzaBruta.py', 'index.html')
