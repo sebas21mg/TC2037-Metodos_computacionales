@@ -25,15 +25,14 @@ end
 
 defmodule HwPrimes do
   # Calculate the sum of all primes up to the given limit sequentially
-  def sum_primes(start, finish) do
-    start..finish
+  def sum_primes(limit) do
+    2..limit
     |> Enum.filter(&is_prime/1)
     |> Enum.sum()
   end
 
-  # Calculate the sum of all primes up to the given limit in parallel using multiple threads
-  def sum_primes_parallel(start, finish, threads) do
-    ranges = make_ranges(start, finish, threads)
+  def sum_primes_parallel(limit, threads) do
+    ranges = make_ranges(2, limit, threads)
     ranges
     |> Enum.map(&Task.async(fn -> sum_primes_range(&1) end))
     |> Enum.map(&Task.await(&1))
@@ -48,11 +47,10 @@ defmodule HwPrimes do
   end
 
   # Check if a number is prime
-  defp is_prime(n) when n <= 1, do: false
-  defp is_prime(2), do: true
+  defp is_prime(n) when n < 0, do: false
   defp is_prime(n) do
-    divisors = 2..trunc(:math.sqrt(n))
-    Enum.all?(divisors, fn x -> rem(n, x) != 0 end)
+    sqrt_n = round(:math.ceil(:math.sqrt(n)))
+    Enum.all?(2..sqrt_n, fn i -> rem(n, i) != 0 end)
   end
 
   # Divide the range of numbers into sub-ranges for parallel processing
@@ -77,5 +75,5 @@ IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000, 5) end))
 
 IO.puts("Suma de primos secuencial y paralela:")
 
-IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes(50, 100) end))
-IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes_parallel(50, 100, 7) end))
+IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes(5000000) end))
+IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes_parallel(5000000, 8) end))
