@@ -47,7 +47,7 @@ defmodule HwPrimes do
   end
 
   # Check if a number is prime
-  defp is_prime(n) when n < 0, do: false
+  defp is_prime(n) when n < 2, do: false
   defp is_prime(n) do
     sqrt_n = round(:math.ceil(:math.sqrt(n)))
     Enum.all?(2..sqrt_n, fn i -> rem(n, i) != 0 end)
