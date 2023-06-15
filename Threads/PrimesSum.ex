@@ -77,5 +77,5 @@ IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000, 5) end))
 
 IO.puts("Suma de primos secuencial y paralela:")
 
-IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes(100) end))
-IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes_parallel(100, 7) end))
+IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes(50, 100) end))
+IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes_parallel(50, 100, 7) end))
