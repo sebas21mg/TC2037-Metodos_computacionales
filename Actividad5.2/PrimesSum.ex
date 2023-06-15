@@ -35,7 +35,7 @@ defmodule HwPrimes do
     ranges = make_ranges(start, finish, threads)
     ranges
     |> Enum.map(&Task.async(fn -> sum_primes_range(&1) end))
-    |> Enum.map(&Task.await(&1))
+    |> Enum.map(&Task.await(&1, 10000))
     |> Enum.sum()
   end
 
@@ -76,4 +76,4 @@ IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000, 5) end))
 IO.puts("Suma de primos secuencial y paralela:")
 
 IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes(0, 5000000) end))
-IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes_parallel(0, 5000000, 8) end))
+IO.inspect(:timer.tc(fn -> HwPrimes.sum_primes_parallel(0, 5000000, 4) end))
