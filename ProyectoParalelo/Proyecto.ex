@@ -58,45 +58,47 @@ defmodule SyntaxHighlighter do
     end
   end
 
-  # Main function. Reads the inFilePath file and makes a html file with the syntak highlighted
+  # Reads the inFilePath file and makes an html file with the syntax highlighted
   def highlightFile(inFilePath, outFilePath) do
-    title = inFilePath |> Path.basename() # Get the file name
+    title = inFilePath |> Path.basename() # Gets the title of the file
 
     body = inFilePath 
-      |> File.stream!() # Get every line of the document
-      |> Enum.map(&highlightLine(&1)) # Make the syntak highlight in every line
-      |> Enum.join("") # Join them
+      |> File.stream!() # Gets every line of the document
+      |> Enum.map(&highlightLine(&1)) # Highlights the syntax in every line
+      |> Enum.join("") # Joins them
 
-    File.write(outFilePath, Enum.join([@htmlBeforeTitle, title, @htmlAfterTitle, body, @htmlEnd])) # Write the file
+    File.write(outFilePath, Enum.join([@htmlBeforeTitle, title, @htmlAfterTitle, body, @htmlEnd])) # Writes the file
   end
 
-  # Función para resaltar léxico de múltiples archivos en secuencia
+  # Highlights the syntax of multiple files that are in a list
   defp highlightFiles(list, inDirPath, outDirPath) do
-    list
+    list # list with the files paths
     |> Enum.each(fn inFilePath ->
-      outFilePath = Path.join(outDirPath, inFilePath 
-        |> Path.relative_to(inDirPath) 
-        |> String.split(".") 
-        |> Enum.at(0) 
-        |> Kernel.<>(".html"))
+      outFilePath = Path.join(outDirPath, inFilePath # Changes the parent folder of the files
+        |> Path.basename(inDirPath) # Gets just the file name
+        |> String.split(".") |> Enum.at(0) # Deletes its extension 
+        |> Kernel.<>(".html")) # Adds the html extension
       highlightFile(inFilePath, outFilePath)
     end)
   end
 
+  # Sequentially highlights the syntax of the files in a directory 
   def highlightSyntaxSequential(inDirPath, outDirPath) do
-    Path.wildcard(Path.join(inDirPath, "**/*.py"))
+    Path.wildcard(Path.join(inDirPath, "**/*.py")) # Gets all the files paths as a list
       |> highlightFiles(inDirPath, outDirPath)
   end
 
+  # In parallel highlights the syntax of the files in a directory
   def highlightSyntaxParallel(inDirPath, outDirPath, cores) do
-    list = Path.wildcard(Path.join(inDirPath, "**/*.py"))
-    elements_amount = div(length(list), cores) + 1
+    list = Path.wildcard(Path.join(inDirPath, "**/*.py")) # Gets all the files paths as a list
+    elements_amount = div(length(list), cores) + 1 # Calculates the amount of elements that will have every sub-list
 
-    Enum.chunk_every(list, elements_amount)
-      |> Enum.map(&Task.async(fn -> highlightFiles(&1, inDirPath, outDirPath) end)) # Create a new process
+    Enum.chunk_every(list, elements_amount) # Makes the list of lists
+      |> Enum.map(&Task.async(fn -> highlightFiles(&1, inDirPath, outDirPath) end)) # Creates a new process
       |> Enum.map(&Task.await(&1))
   end
 
+  # Calculates in seconds the time it takes for a function to execute and turns it in a string
   defp calcSecs(func) do
     func
       |> :timer.tc
@@ -107,13 +109,15 @@ defmodule SyntaxHighlighter do
       |> Kernel.<>("s")
   end
 
+  # Makes a nice output line for the highlightSyntaxSequential function
   def niceOutput(inDirPath, outDirPath) do
     seconds = fn -> highlightSyntaxSequential(inDirPath, outDirPath) end
       |> calcSecs()
 
     IO.puts("Secuencial: Con 1 core tarda " <> seconds)  
   end
-  
+
+  # Makes a nice output line for the highlightSyntaxParallel function
   def niceOutput(inDirPath, outDirPath, cores) do
     seconds = fn -> highlightSyntaxParallel(inDirPath, outDirPath, cores) end
       |> calcSecs()
