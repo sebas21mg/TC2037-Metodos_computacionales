@@ -71,7 +71,7 @@ defmodule SyntaxHighlighter do
   end
 
   # Función para resaltar léxico de múltiples archivos en secuencia
-  def highlightFiles(list, inDirPath, outDirPath) do
+  defp highlightFiles(list, inDirPath, outDirPath) do
     list
     |> Enum.each(fn inFilePath ->
       outFilePath = Path.join(outDirPath, inFilePath 
@@ -97,21 +97,40 @@ defmodule SyntaxHighlighter do
       |> Enum.map(&Task.await(&1))
   end
 
-  def niceOutput(time, cores) do
-    seconds = time
+  defp calcSecs(func) do
+    func
+      |> :timer.tc
       |> elem(0) 
       |> Kernel./(1_000_000) 
       |> Float.round(3) 
       |> Float.to_string() 
-      |> Kernel.<>(" s")
-    IO.puts("Con " <> Integer.to_string(cores) <> " tarda " <> seconds)  
+      |> Kernel.<>("s")
+  end
+
+  def niceOutput(inDirPath, outDirPath) do
+    seconds = fn -> highlightSyntaxSequential(inDirPath, outDirPath) end
+      |> calcSecs()
+
+    IO.puts("Secuencial: Con 1 core tarda " <> seconds)  
+  end
+  
+  def niceOutput(inDirPath, outDirPath, cores) do
+    seconds = fn -> highlightSyntaxParallel(inDirPath, outDirPath, cores) end
+      |> calcSecs()
+
+    IO.puts(
+      "Paralela: Con " 
+      <> Integer.to_string(cores) 
+      <> (if cores == 1, do: " core", else: " cores") 
+      <> " tarda " 
+      <> seconds)  
   end
 
 end
 
 # Execution of the program
-:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxSequential('Python', 'Html') end) |> SyntaxHighlighter.niceOutput(1)
-:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Python', 'Html', 1) end) |> SyntaxHighlighter.niceOutput(1)
-:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Python', 'Html', 2) end) |> SyntaxHighlighter.niceOutput(2)
-:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Python', 'Html', 3) end) |> SyntaxHighlighter.niceOutput(3)
-:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Python', 'Html', 4) end) |> SyntaxHighlighter.niceOutput(4)
+SyntaxHighlighter.niceOutput('Python', 'Html')
+SyntaxHighlighter.niceOutput('Python', 'Html', 1)
+SyntaxHighlighter.niceOutput('Python', 'Html', 2)
+SyntaxHighlighter.niceOutput('Python', 'Html', 3)
+SyntaxHighlighter.niceOutput('Python', 'Html', 4)

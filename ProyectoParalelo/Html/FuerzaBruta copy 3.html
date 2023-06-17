@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' href='./../styles.css'>
+<title>FuerzaBruta copy 3.py</title>
+</head>
+<body>
+<pre>
+<span class='palabras-reservada'>import</span> <span class='variable'>random</span>
+
+<span class='variable'>board</span> <span class='signo'>=</span> <span class='parentesis'>[</span><span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span><span class='parentesis'>]</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>print_b</span><span class='parentesis'>(</span><span class='variable'>board</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>for</span> <span class='variable'>i</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+        <span class='palabras-reservada'>for</span> <span class='variable'>j</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+            <span class='funcion'>print</span><span class='parentesis'>(</span><span class='variable'>board</span><span class='parentesis'>[</span><span class='variable'>i</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>j</span><span class='parentesis'>]</span>, <span class='variable'>end</span><span class='signo'>=</span><span class='cadena-texto'>" "</span><span class='parentesis'>)</span>
+        <span class='funcion'>print</span><span class='parentesis'>(</span><span class='parentesis'>)</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>check_attack</span><span class='parentesis'>(</span><span class='variable'>i</span>, <span class='variable'>j</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>for</span> <span class='variable'>k</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+        <span class='palabras-reservada'>if</span> <span class='variable'>board</span><span class='parentesis'>[</span><span class='variable'>i</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>k</span><span class='parentesis'>]</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>1</span> <span class='variable'>or</span> <span class='variable'>board</span><span class='parentesis'>[</span><span class='variable'>k</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>j</span><span class='parentesis'>]</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>1</span>:
+            <span class='palabras-reservada'>return</span> <span class='variable'>True</span>
+    <span class='palabras-reservada'>for</span> <span class='variable'>k</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+        <span class='palabras-reservada'>for</span> <span class='variable'>l</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+            <span class='palabras-reservada'>if</span> <span class='parentesis'>(</span><span class='variable'>k</span> <span class='signo'>+</span> <span class='variable'>l</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>i</span> <span class='signo'>+</span> <span class='variable'>j</span><span class='parentesis'>)</span> <span class='funcion'>or </span><span class='parentesis'>(</span><span class='variable'>k</span> <span class='signo'>-</span> <span class='variable'>l</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>i</span> <span class='signo'>-</span> <span class='variable'>j</span><span class='parentesis'>)</span>:
+                <span class='palabras-reservada'>if</span> <span class='variable'>board</span><span class='parentesis'>[</span><span class='variable'>k</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>l</span><span class='parentesis'>]</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>1</span>:
+                    <span class='palabras-reservada'>return</span> <span class='variable'>True</span>
+
+<span class='variable'>counter</span> <span class='signo'>=</span> <span class='variable'>0</span>
+<span class='variable'>counter_try</span> <span class='signo'>=</span> <span class='variable'>1</span>
+<span class='variable'>total_try</span> <span class='signo'>=</span> <span class='variable'>1</span>
+
+<span class='palabras-reservada'>while</span> <span class='variable'>True</span>:
+    <span class='variable'>i</span> <span class='signo'>=</span> <span class='variable'>random</span>.<span class='funcion'>randint</span><span class='parentesis'>(</span><span class='variable'>0</span>, <span class='variable'>7</span><span class='parentesis'>)</span>
+    <span class='variable'>j</span> <span class='signo'>=</span> <span class='variable'>random</span>.<span class='funcion'>randint</span><span class='parentesis'>(</span><span class='variable'>0</span>, <span class='variable'>7</span><span class='parentesis'>)</span>
+
+    <span class='palabras-reservada'>if</span> <span class='variable'>not</span> <span class='funcion'>check_attack</span><span class='parentesis'>(</span><span class='variable'>i</span>, <span class='variable'>j</span><span class='parentesis'>)</span>:
+        <span class='variable'>board</span><span class='parentesis'>[</span><span class='variable'>i</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>j</span><span class='parentesis'>]</span> <span class='signo'>=</span> <span class='variable'>1</span>
+        <span class='variable'>counter</span> <span class='signo'>+</span><span class='signo'>=</span> <span class='variable'>1</span>
+        <span class='funcion'>print</span><span class='parentesis'>(</span><span class='cadena-texto'>"counter:"</span>, <span class='variable'>counter</span><span class='parentesis'>)</span>
+        <span class='funcion'>print_b</span><span class='parentesis'>(</span><span class='variable'>board</span><span class='parentesis'>)</span>
+
+    <span class='variable'>counter_try</span> <span class='signo'>+</span><span class='signo'>=</span> <span class='variable'>1</span>
+    <span class='palabras-reservada'>if</span> <span class='variable'>counter_try</span> <span class='signo'>></span> <span class='variable'>1000000</span>:
+        <span class='variable'>counter</span> <span class='signo'>=</span> <span class='variable'>0</span>
+        <span class='variable'>counter_try</span> <span class='signo'>=</span> <span class='variable'>1</span>
+        <span class='variable'>board</span> <span class='signo'>=</span> <span class='parentesis'>[</span><span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span><span class='parentesis'>]</span>
+
+    <span class='variable'>total_try</span> <span class='signo'>+</span><span class='signo'>=</span> <span class='variable'>1</span>
+
+    <span class='palabras-reservada'>if</span> <span class='variable'>counter</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>8</span>:
+        <span class='funcion'>print</span><span class='parentesis'>(</span><span class='cadena-texto'>"Solution found in"</span>, <span class='variable'>total_try</span>, <span class='cadena-texto'>"attempts"</span><span class='parentesis'>)</span>
+        <span class='funcion'>print_b</span><span class='parentesis'>(</span><span class='variable'>board</span><span class='parentesis'>)</span>
+        <span class='variable'>break</span>
+    
+    
+<span class='variable'>board_test</span> <span class='signo'>=</span> <span class='parentesis'>[</span><span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>1</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>1</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>1</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>1</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>1</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>1</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>1</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+<span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>1</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span><span class='parentesis'>]</span>
+
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>print_b</span><span class='parentesis'>(</span><span class='variable'>board_test</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>for</span> <span class='variable'>i</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+        <span class='palabras-reservada'>for</span> <span class='variable'>j</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+            <span class='funcion'>print</span><span class='parentesis'>(</span><span class='variable'>board_test</span><span class='parentesis'>[</span><span class='variable'>i</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>j</span><span class='parentesis'>]</span>, <span class='variable'>end</span><span class='signo'>=</span><span class='cadena-texto'>" "</span><span class='parentesis'>)</span>
+        <span class='funcion'>print</span><span class='parentesis'>(</span><span class='parentesis'>)</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>check_attack</span><span class='parentesis'>(</span><span class='variable'>i</span>, <span class='variable'>j</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>for</span> <span class='variable'>k</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+        <span class='palabras-reservada'>if</span> <span class='variable'>board_test</span><span class='parentesis'>[</span><span class='variable'>i</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>k</span><span class='parentesis'>]</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>1</span> <span class='variable'>or</span> <span class='variable'>board_test</span><span class='parentesis'>[</span><span class='variable'>k</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>j</span><span class='parentesis'>]</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>1</span>:
+            <span class='palabras-reservada'>return</span> <span class='variable'>True</span>
+    <span class='palabras-reservada'>for</span> <span class='variable'>k</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+        <span class='palabras-reservada'>for</span> <span class='variable'>l</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='variable'>8</span><span class='parentesis'>)</span>:
+            <span class='palabras-reservada'>if</span> <span class='parentesis'>(</span><span class='variable'>k</span> <span class='signo'>+</span> <span class='variable'>l</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>i</span> <span class='signo'>+</span> <span class='variable'>j</span><span class='parentesis'>)</span> <span class='funcion'>or </span><span class='parentesis'>(</span><span class='variable'>k</span> <span class='signo'>-</span> <span class='variable'>l</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>i</span> <span class='signo'>-</span> <span class='variable'>j</span><span class='parentesis'>)</span>:
+                <span class='palabras-reservada'>if</span> <span class='variable'>board_test</span><span class='parentesis'>[</span><span class='variable'>k</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>l</span><span class='parentesis'>]</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>1</span>:
+                    <span class='palabras-reservada'>return</span> <span class='variable'>True</span>
+                
+<span class='palabras-reservada'>while</span> <span class='variable'>True</span>:
+    <span class='variable'>i</span> <span class='signo'>=</span> <span class='variable'>random</span>.<span class='funcion'>randint</span><span class='parentesis'>(</span><span class='variable'>0</span>, <span class='variable'>7</span><span class='parentesis'>)</span>
+    <span class='variable'>j</span> <span class='signo'>=</span> <span class='variable'>random</span>.<span class='funcion'>randint</span><span class='parentesis'>(</span><span class='variable'>0</span>, <span class='variable'>7</span><span class='parentesis'>)</span>
+
+    <span class='palabras-reservada'>if</span> <span class='variable'>not</span> <span class='funcion'>check_attack</span><span class='parentesis'>(</span><span class='variable'>i</span>, <span class='variable'>j</span><span class='parentesis'>)</span>:
+        <span class='variable'>board_test</span><span class='parentesis'>[</span><span class='variable'>i</span><span class='parentesis'>]</span><span class='parentesis'>[</span><span class='variable'>j</span><span class='parentesis'>]</span> <span class='signo'>=</span> <span class='variable'>1</span>
+        <span class='variable'>counter</span> <span class='signo'>+</span><span class='signo'>=</span> <span class='variable'>1</span>
+        <span class='funcion'>print</span><span class='parentesis'>(</span><span class='cadena-texto'>"counter:"</span>, <span class='variable'>counter</span><span class='parentesis'>)</span>
+        <span class='funcion'>print_b</span><span class='parentesis'>(</span><span class='variable'>board_test</span><span class='parentesis'>)</span>
+
+    <span class='variable'>counter_try</span> <span class='signo'>+</span><span class='signo'>=</span> <span class='variable'>1</span>
+    <span class='palabras-reservada'>if</span> <span class='variable'>counter_try</span> <span class='signo'>></span> <span class='variable'>1000000</span>:
+        <span class='variable'>counter</span> <span class='signo'>=</span> <span class='variable'>0</span>
+        <span class='variable'>counter_try</span> <span class='signo'>=</span> <span class='variable'>1</span>
+        <span class='variable'>board_test</span> <span class='signo'>=</span> <span class='parentesis'>[</span><span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span>,
+        <span class='parentesis'>[</span><span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span>,<span class='variable'>0</span><span class='parentesis'>]</span><span class='parentesis'>]</span>
+
+    <span class='variable'>total_try</span> <span class='signo'>+</span><span class='signo'>=</span> <span class='variable'>1</span>
+
+    <span class='palabras-reservada'>if</span> <span class='variable'>counter</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='variable'>8</span>:
+        <span class='funcion'>print</span><span class='parentesis'>(</span><span class='cadena-texto'>"Solution found in"</span>, <span class='variable'>total_try</span>, <span class='cadena-texto'>"attempts"</span><span class='parentesis'>)</span>
+        <span class='funcion'>print_b</span><span class='parentesis'>(</span><span class='variable'>board_test</span><span class='parentesis'>)</span>
+        <span class='variable'>break</span>
+</pre>
+</body>
+</html>

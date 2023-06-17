@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' href='./../styles.css'>
+<title>prueba3 copy 3.py</title>
+</head>
+<body>
+<pre>
+<span class='comentario'># In this activity I promise to apply my knowledge, to make an effort in its development and not to use unauthorized or illegal means to carry it out.</span>
+<span class='comentario'># Samuel Acevedo</span>
+<span class='comentario'># October 20th 2021</span>
+
+<span class='palabras-reservada'>import</span> <span class='variable'>csv</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>read_data</span><span class='parentesis'>(</span><span class='variable'>filename</span><span class='parentesis'>)</span>:
+    <span class='variable'>data</span> <span class='signo'>=</span> <span class='parentesis'>[</span><span class='parentesis'>]</span>
+    <span class='palabras-reservada'>with</span> <span class='funcion'>open</span><span class='parentesis'>(</span><span class='variable'>filename</span>, <span class='variable'>newline</span><span class='signo'>=</span><span class='cadena-texto'>''</span><span class='parentesis'>)</span> <span class='variable'>as</span> <span class='variable'>file_data</span>:
+        <span class='variable'>csv_reader</span> <span class='signo'>=</span> <span class='variable'>csv</span>.<span class='funcion'>reader</span><span class='parentesis'>(</span><span class='variable'>file_data</span><span class='parentesis'>)</span>
+        <span class='palabras-reservada'>for</span> <span class='variable'>line</span> <span class='palabras-reservada'>in</span> <span class='variable'>csv_reader</span>:
+            <span class='variable'>data</span>.<span class='funcion'>append</span><span class='parentesis'>(</span><span class='variable'>line</span><span class='parentesis'>)</span>
+    <span class='palabras-reservada'>return</span> <span class='variable'>data</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>write_data</span><span class='parentesis'>(</span><span class='variable'>data</span>, <span class='variable'>filename</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>with</span> <span class='funcion'>open</span><span class='parentesis'>(</span><span class='variable'>filename</span>, <span class='cadena-texto'>"w"</span>, <span class='variable'>newline</span><span class='signo'>=</span><span class='cadena-texto'>''</span><span class='parentesis'>)</span> <span class='variable'>as</span> <span class='variable'>file_ref</span>:
+        <span class='variable'>csv_writer</span> <span class='signo'>=</span> <span class='variable'>csv</span>.<span class='funcion'>writer</span><span class='parentesis'>(</span><span class='variable'>file_ref</span><span class='parentesis'>)</span>
+        <span class='palabras-reservada'>for</span> <span class='palabras-reservada'>row</span> <span class='palabras-reservada'>in</span> <span class='variable'>data</span>:
+            <span class='variable'>csv_writer</span>.<span class='funcion'>writerow</span><span class='parentesis'>(</span><span class='palabras-reservada'>row</span><span class='parentesis'>)</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>convert_to_int</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>for</span> <span class='palabras-reservada'>row</span> <span class='palabras-reservada'>in</span> <span class='variable'>data</span><span class='parentesis'>[</span><span class='variable'>1</span>:<span class='parentesis'>]</span>:
+        <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>2</span><span class='parentesis'>]</span> <span class='signo'>=</span> <span class='funcion'>int</span><span class='parentesis'>(</span><span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>2</span><span class='parentesis'>]</span><span class='parentesis'>)</span>
+        <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>3</span><span class='parentesis'>]</span> <span class='signo'>=</span> <span class='funcion'>int</span><span class='parentesis'>(</span><span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>3</span><span class='parentesis'>]</span><span class='parentesis'>)</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>print_matrix</span><span class='parentesis'>(</span><span class='variable'>matrix</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>for</span> <span class='palabras-reservada'>row</span> <span class='palabras-reservada'>in</span> <span class='variable'>matrix</span>:
+        <span class='variable'>line</span> <span class='signo'>=</span> <span class='cadena-texto'>""</span>
+        <span class='palabras-reservada'>for</span> <span class='variable'>item</span> <span class='palabras-reservada'>in</span> <span class='palabras-reservada'>row</span>:
+            <span class='variable'>line</span> <span class='signo'>=</span> <span class='variable'>line</span> <span class='signo'>+</span> <span class='variable'>f</span><span class='cadena-texto'>"{item:12} "</span>
+        <span class='funcion'>print</span><span class='parentesis'>(</span><span class='variable'>line</span><span class='parentesis'>)</span>      
+        
+<span class='palabras-reservada'>def</span> <span class='funcion'>quit_stamps</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>for</span> <span class='palabras-reservada'>row</span> <span class='palabras-reservada'>in</span> <span class='variable'>data</span><span class='parentesis'>[</span><span class='variable'>1</span>:<span class='parentesis'>]</span>:
+        <span class='palabras-reservada'>while</span> <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>2</span><span class='parentesis'>]</span> <span class='signo'>></span><span class='signo'>=</span> <span class='variable'>5</span>:
+            <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>2</span><span class='parentesis'>]</span> <span class='signo'>=</span> <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>2</span><span class='parentesis'>]</span> <span class='signo'>-</span> <span class='variable'>5</span>
+            <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>3</span><span class='parentesis'>]</span> <span class='signo'>=</span> <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>3</span><span class='parentesis'>]</span> <span class='signo'>+</span> <span class='variable'>10</span>
+            
+<span class='palabras-reservada'>def</span> <span class='funcion'>exchange_columns</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>:
+    <span class='palabras-reservada'>for</span> <span class='palabras-reservada'>row</span> <span class='palabras-reservada'>in</span> <span class='variable'>data</span><span class='parentesis'>[</span><span class='variable'>0</span>:<span class='parentesis'>]</span>:
+        <span class='palabras-reservada'>row_0</span> <span class='signo'>=</span> <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>0</span><span class='parentesis'>]</span>
+        <span class='palabras-reservada'>row_1</span> <span class='signo'>=</span> <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>1</span><span class='parentesis'>]</span>
+        <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>0</span><span class='parentesis'>]</span> <span class='signo'>=</span> <span class='palabras-reservada'>row_1</span>
+        <span class='palabras-reservada'>row</span><span class='parentesis'>[</span><span class='variable'>1</span><span class='parentesis'>]</span> <span class='signo'>=</span> <span class='palabras-reservada'>row_0</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>discount_2</span><span class='parentesis'>(</span><span class='variable'>filename</span><span class='parentesis'>)</span>:
+    <span class='variable'>filename</span> <span class='signo'>=</span> <span class='cadena-texto'>"discount_cards_2.csv"</span>
+    <span class='variable'>data</span> <span class='signo'>=</span> <span class='funcion'>read_data</span><span class='parentesis'>(</span><span class='variable'>filename</span><span class='parentesis'>)</span>
+    <span class='funcion'>convert_to_int</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>
+
+    <span class='variable'>columns</span> <span class='signo'>=</span> <span class='funcion'>exchange_columns</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>
+    <span class='variable'>stamps</span> <span class='signo'>=</span> <span class='funcion'>quit_stamps</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>
+    <span class='funcion'>print</span><span class='parentesis'>(</span><span class='funcion'>print_matrix</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span><span class='parentesis'>)</span>
+
+    <span class='variable'>archive</span> <span class='signo'>=</span> <span class='funcion'>open</span><span class='parentesis'>(</span><span class='cadena-texto'>"ok_discount_cards_2.csv"</span>,<span class='cadena-texto'>"w"</span><span class='parentesis'>)</span>
+    <span class='variable'>i</span> <span class='signo'>=</span> <span class='variable'>0</span>
+    <span class='palabras-reservada'>for</span> <span class='variable'>index</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='funcion'>len</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span><span class='parentesis'>)</span>:
+        <span class='variable'>index</span> <span class='signo'>=</span> <span class='funcion'>str</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>[</span><span class='variable'>i</span><span class='parentesis'>]</span><span class='parentesis'>)</span>
+        <span class='variable'>archive</span>.<span class='funcion'>write</span><span class='parentesis'>(</span><span class='funcion'>str</span><span class='parentesis'>(</span><span class='variable'>index</span><span class='parentesis'>[</span><span class='variable'>1</span>:<span class='signo'>-</span><span class='variable'>1</span><span class='parentesis'>]</span><span class='parentesis'>)</span><span class='parentesis'>)</span>
+        <span class='variable'>archive</span>.<span class='funcion'>write</span><span class='parentesis'>(</span><span class='cadena-texto'>"\n"</span><span class='parentesis'>)</span>
+        <span class='variable'>i</span> <span class='signo'>+</span><span class='signo'>=</span> <span class='variable'>1</span>
+    <span class='variable'>archive</span>.<span class='funcion'>close</span><span class='parentesis'>(</span><span class='parentesis'>)</span>
+    <span class='palabras-reservada'>return</span> <span class='variable'>filename</span>
+
+<span class='palabras-reservada'>def</span> <span class='funcion'>discount_1</span><span class='parentesis'>(</span><span class='variable'>filename</span><span class='parentesis'>)</span>:
+    <span class='variable'>filename</span> <span class='signo'>=</span> <span class='cadena-texto'>"discount_cards_1.csv"</span>
+    <span class='variable'>data</span> <span class='signo'>=</span> <span class='funcion'>read_data</span><span class='parentesis'>(</span><span class='variable'>filename</span><span class='parentesis'>)</span>
+    <span class='funcion'>convert_to_int</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>
+
+    <span class='variable'>columns</span> <span class='signo'>=</span> <span class='funcion'>exchange_columns</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>
+    <span class='variable'>stamps</span> <span class='signo'>=</span> <span class='funcion'>quit_stamps</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span>
+    <span class='funcion'>print</span><span class='parentesis'>(</span><span class='funcion'>print_matrix</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span><span class='parentesis'>)</span>
+
+    <span class='variable'>archive</span> <span class='signo'>=</span> <span class='funcion'>open</span><span class='parentesis'>(</span><span class='cadena-texto'>"ok_discount_cards_1.csv"</span>,<span class='cadena-texto'>"w"</span><span class='parentesis'>)</span>
+    <span class='variable'>i</span> <span class='signo'>=</span> <span class='variable'>0</span>
+    <span class='palabras-reservada'>for</span> <span class='variable'>index</span> <span class='palabras-reservada'>in</span> <span class='funcion'>range</span><span class='parentesis'>(</span><span class='funcion'>len</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>)</span><span class='parentesis'>)</span>:
+        <span class='variable'>index</span> <span class='signo'>=</span> <span class='funcion'>str</span><span class='parentesis'>(</span><span class='variable'>data</span><span class='parentesis'>[</span><span class='variable'>i</span><span class='parentesis'>]</span><span class='parentesis'>)</span>
+        <span class='variable'>archive</span>.<span class='funcion'>write</span><span class='parentesis'>(</span><span class='funcion'>str</span><span class='parentesis'>(</span><span class='variable'>index</span><span class='parentesis'>[</span><span class='variable'>1</span>:<span class='signo'>-</span><span class='variable'>1</span><span class='parentesis'>]</span><span class='parentesis'>)</span><span class='parentesis'>)</span>
+        <span class='variable'>archive</span>.<span class='funcion'>write</span><span class='parentesis'>(</span><span class='cadena-texto'>"\n"</span><span class='parentesis'>)</span>
+        <span class='variable'>i</span> <span class='signo'>+</span><span class='signo'>=</span> <span class='variable'>1</span>
+    <span class='variable'>archive</span>.<span class='funcion'>close</span><span class='parentesis'>(</span><span class='parentesis'>)</span>
+    <span class='palabras-reservada'>return</span> <span class='variable'>filename</span>
+
+<span class='variable'>answer</span> <span class='signo'>=</span> <span class='cadena-texto'>"y"</span>
+<span class='palabras-reservada'>while</span> <span class='variable'>answer</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='cadena-texto'>"y"</span>:
+    <span class='variable'>question_user</span> <span class='signo'>=</span> <span class='funcion'>input</span><span class='parentesis'>(</span><span class='cadena-texto'>"Which file do you want to be shown?: (1/2)\n"</span><span class='parentesis'>)</span>
+    <span class='palabras-reservada'>if</span> <span class='variable'>question_user</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='cadena-texto'>"1"</span>:
+        <span class='variable'>show_discount_1</span> <span class='signo'>=</span> <span class='funcion'>discount_1</span><span class='parentesis'>(</span><span class='variable'>question_user</span><span class='parentesis'>)</span>
+    <span class='palabras-reservada'>elif</span> <span class='variable'>question_user</span> <span class='signo'>=</span><span class='signo'>=</span> <span class='cadena-texto'>"2"</span>:
+        <span class='variable'>show_discount_2</span> <span class='signo'>=</span> <span class='funcion'>discount_2</span><span class='parentesis'>(</span><span class='variable'>question_user</span><span class='parentesis'>)</span>
+    <span class='palabras-reservada'>else</span>:
+        <span class='funcion'>print</span><span class='parentesis'>(</span><span class='cadena-texto'>"Incorrect input, Try Again"</span><span class='parentesis'>)</span>
+        
+    <span class='variable'>answer</span> <span class='signo'>=</span> <span class='funcion'>input</span><span class='parentesis'>(</span><span class='cadena-texto'>"Again ([y] / n)?: "</span><span class='parentesis'>)</span>
+<span class='funcion'>print</span><span class='parentesis'>(</span><span class='cadena-texto'>"Thank you four using this program \nHope this one was useful for you!"</span><span class='parentesis'>)</span>
+</pre>
+</body>
+</html>
