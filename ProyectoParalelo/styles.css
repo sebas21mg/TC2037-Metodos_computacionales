@@ -1,0 +1,34 @@
+body {
+  font-family: monospace;
+  background-color: #2a2a3a;
+  color: #fff;
+  padding: 5vh 5%;
+}
+
+.palabras-reservada {
+  color: hsl(33, 90%, 58%);
+}
+
+.signo {
+  color: hsl(270, 90%, 58%);
+}
+
+.variable {
+  color: hsl(222, 90%, 58%);
+}
+
+.funcion {
+  color: hsl(4, 90%, 58%);
+}
+
+.cadena-texto {
+  color: hsl(140, 90%, 58%);
+}
+
+.comentario {
+  color: hsl(0, 0%, 49%);
+}
+
+.parentesis {
+  color: hsl(319, 90%, 58%);
+}
