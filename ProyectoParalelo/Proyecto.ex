@@ -3,7 +3,7 @@
 
 defmodule SyntaxHighlighter do
 
-  @htmlBeforeTitle "<!DOCTYPE html>\n<html lang='es'>\n<head>\n<meta charset='UTF-8'>\n<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n<meta name='viewport' content='width=device-width, initial-scale=1.0'>\n<link rel='stylesheet' href='../styles.css'>\n<title>"
+  @htmlBeforeTitle "<!DOCTYPE html>\n<html lang='es'>\n<head>\n<meta charset='UTF-8'>\n<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n<meta name='viewport' content='width=device-width, initial-scale=1.0'>\n<link rel='stylesheet' href='./../styles.css'>\n<title>"
   @htmlAfterTitle "</title>\n</head>\n<body>\n<pre>\n"
   @htmlEnd "\n</pre>\n</body>\n</html>"
 
@@ -38,11 +38,7 @@ defmodule SyntaxHighlighter do
     regexes)
 
   # This function compares the first element of the original line with all the regexes
-  defp do_highlightLine(line, newLine, [head | tail], regexes) do
-    # Gets the elements of the head
-    regex = Enum.at(head, 0)
-    class = Enum.at(head, 1)
-
+  defp do_highlightLine(line, newLine, [[regex, class] | tail], regexes) do
     # When the first element of the original line matches with the regex
     if Regex.match?(regex, line) do
       do_highlightLine(
@@ -62,38 +58,8 @@ defmodule SyntaxHighlighter do
     end
   end
 
-  # Función para resaltar léxico de múltiples archivos en secuencia
-  def highlightSyntaxSequential(inDirPath, outDirPath) do
-    Path.wildcard(Path.join(inDirPath, "**/*.py"))
-    |> Enum.each(fn inFilePath ->
-      outFilePath = inFilePath
-        |> Path.relative_to(inDirPath)
-        |> Path.dirname()
-        |> Path.join(outDirPath)
-        |> Path.join(Path.basename(inFilePath) <> ".html")
-
-      highlightSyntax(inFilePath, outFilePath)
-    end)
-  end
-
-
-  # Función para resaltar léxico de múltiples archivos en paralelo
-  # def highlightSyntaxParallel(inDirPath, outDirPath) do
-  #   Path.wildcard(Path.join(inDirPath, "**/*.py"))
-  #   |> Task.async_stream(fn inFilePath ->
-  #     outFilePath = inFilePath
-  #       |> Path.relative_to(inDirPath)
-  #       |> Path.dirname()
-  #       |> Path.join(outDirPath)
-  #       |> Path.join(Path.basename(inFilePath) <> ".html")
-
-  #     highlightSyntax(inFilePath, outFilePath)
-  #   end)
-  #   |> Enum.map(&Task.await/1)
-  # end
-
   # Main function. Reads the inFilePath file and makes a html file with the syntak highlighted
-  def highlightSyntax(inFilePath, outFilePath) do
+  def highlightFile(inFilePath, outFilePath) do
     title = inFilePath |> Path.basename() # Get the file name
 
     body = inFilePath 
@@ -104,13 +70,48 @@ defmodule SyntaxHighlighter do
     File.write(outFilePath, Enum.join([@htmlBeforeTitle, title, @htmlAfterTitle, body, @htmlEnd])) # Write the file
   end
 
+  # Función para resaltar léxico de múltiples archivos en secuencia
+  def highlightFiles(list, inDirPath, outDirPath) do
+    list
+    |> Enum.each(fn inFilePath ->
+      outFilePath = Path.join(outDirPath, inFilePath 
+        |> Path.relative_to(inDirPath) 
+        |> String.split(".") 
+        |> Enum.at(0) 
+        |> Kernel.<>(".html"))
+      highlightFile(inFilePath, outFilePath)
+    end)
+  end
+
+  def highlightSyntaxSequential(inDirPath, outDirPath) do
+    Path.wildcard(Path.join(inDirPath, "**/*.py"))
+      |> highlightFiles(inDirPath, outDirPath)
+  end
+
+  def highlightSyntaxParallel(inDirPath, outDirPath, cores) do
+    list = Path.wildcard(Path.join(inDirPath, "**/*.py"))
+    elements_amount = div(length(list), cores) + 1
+
+    Enum.chunk_every(list, elements_amount)
+      |> Enum.map(&Task.async(fn -> highlightFiles(&1, inDirPath, outDirPath) end)) # Create a new process
+      |> Enum.map(&Task.await(&1))
+  end
+
+  def niceOutput(time, cores) do
+    seconds = time
+      |> elem(0) 
+      |> Kernel./(1_000_000) 
+      |> Float.round(3) 
+      |> Float.to_string() 
+      |> Kernel.<>(" s")
+    IO.puts("Con " <> Integer.to_string(cores) <> " tarda " <> seconds)  
+  end
+
 end
 
-# Execute the program. Change the py file to make the test with another file
-#SyntaxHighlighter.highlightSyntax('FuerzaBruta.py', 'index.html')
-
-#SyntaxHighlighter.highlightSyntaxSequential('Inputs', 'Outputs')
-IO.inspect(:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxSequential('Inputs', 'Outputs') end))
-
-#SyntaxHighlighter.highlightSyntaxParallel('Inputs', 'Outputs')
-#IO.inspect(:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Inputs', 'Outputs') end))
+# Execution of the program
+:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxSequential('Python', 'Html') end) |> SyntaxHighlighter.niceOutput(1)
+:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Python', 'Html', 1) end) |> SyntaxHighlighter.niceOutput(1)
+:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Python', 'Html', 2) end) |> SyntaxHighlighter.niceOutput(2)
+:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Python', 'Html', 3) end) |> SyntaxHighlighter.niceOutput(3)
+:timer.tc(fn -> SyntaxHighlighter.highlightSyntaxParallel('Python', 'Html', 4) end) |> SyntaxHighlighter.niceOutput(4)
