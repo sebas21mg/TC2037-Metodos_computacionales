@@ -1,34 +1,35 @@
 body {
   font-family: monospace;
-  background-color: #2a2a3a;
+  background-color: #252a31;
   color: #fff;
   padding: 5vh 5%;
+  font-weight: bold;
 }
 
 .palabras-reservada {
-  color: hsl(33, 90%, 58%);
+  color: hsl(33, 72%, 63%);
 }
 
 .signo {
-  color: hsl(270, 90%, 58%);
+  color: hsl(270, 72%, 63%);
 }
 
 .variable {
-  color: hsl(222, 90%, 58%);
+  color: hsl(222, 72%, 63%);
 }
 
 .funcion {
-  color: hsl(4, 90%, 58%);
+  color: hsl(4, 72%, 63%);
 }
 
 .cadena-texto {
-  color: hsl(140, 90%, 58%);
+  color: hsl(140, 72%, 63%);
 }
 
 .comentario {
-  color: hsl(0, 0%, 49%);
+  color: hsl(0, 0%, 50%);
 }
 
 .parentesis {
-  color: hsl(319, 90%, 58%);
+  color: hsl(309, 72%, 63%);
 }

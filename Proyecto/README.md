@@ -1,6 +1,6 @@
 # <center>Resaltador de Sintaxis</center>
 
-![Logo Tec](logoTec.png)
+![Logo Tec](/Assets/logoTec.png)
 
 #### <center>Sebastian Enrique Moncada González - A01027028 </center>
 #### <center>Samuel Roberto Acevedo Sandoval - A01026893 </center>
@@ -21,9 +21,9 @@ Para ejecutar el código solo ocupamos ejecutar la siguiente línea en la termin
 
 En este caso nosotros los probamos con unos códigos de prueba, teniendo cómo resultados los siguientes:
 
-![Captura 1](captura1.png)
-![Captura 2](captura2.png)
-![Captura 3](captura3.png)
+![Captura 1](/Assets/captura1.png)
+![Captura 2](/Assets/captura2.png)
+![Captura 3](/Assets/captura3.png)
 
 En dado caso que se quisiese probar con un archivo diferente se puede cambiar directamente en el documento, en la parte de hasta abajo la línea siguiente:
 ```elixir

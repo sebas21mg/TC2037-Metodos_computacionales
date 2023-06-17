@@ -77,4 +77,4 @@ defmodule SyntaxHighlighter do
 end
 
 # Execute the program. Change the py file to make the test with another file
-SyntaxHighlighter.highlightSyntax('FuerzaBruta.py', 'index.html')
+SyntaxHighlighter.highlightSyntax('./Python/FuerzaBruta.py', 'index.html')
