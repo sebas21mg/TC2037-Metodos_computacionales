@@ -1,31 +1,50 @@
-defmodule Sums do
+# Sebastian Moncada
+# Samuel Acevedo
 
-  def range_sum({start, finish}), do: Enum.sum(start..finish)
+# Program that calculates sequentally and parallel the sum of the prime numbers between 1 and 5,000,000
 
-  def make_ranges(start, finish, cores) do
+defmodule Hw.Primes do
+
+  # Check if a number is prime
+  defp is_prime(n) when n < 2, do: false
+  defp is_prime(n) when n == 2, do: true
+  defp is_prime(n), do: Enum.all?(2..round(:math.sqrt(n)), fn i -> rem(n, i) != 0 end)
+
+  # Divide the range of numbers into sub-ranges for parallel processing
+  defp make_ranges(start, finish, cores) do
     elements_amount = div(finish - start, cores) + 1
     ranges = Enum.chunk_every(start..finish, elements_amount)
     do_make_ranges(ranges, [])
   end
+  
+  # Convert the list of sub-ranges into a list of tuples representing the start and end of each range
+  defp do_make_ranges([], res), do: Enum.reverse(res)
+  defp do_make_ranges([head | tail], res), do: do_make_ranges(tail, [{List.first(head), List.last(head)} | res])
 
-  def do_make_ranges([], res), do: Enum.reverse(res)
-  def do_make_ranges([head | tail], res), do: do_make_ranges(tail, [{List.first(head), List.last(head)} | res])
+  # Calculate the sum of primes within a given range
+  defp sum_primes_range({start, finish}) do
+    start..finish
+      |> Enum.filter(&is_prime/1)
+      |> Enum.sum()
+  end
 
-  def total_sum(start, finish, cores) do
-    # Create a list of tuples to send to the function
-    make_ranges(start, finish, cores)
-    |> Enum.map(&Task.async(fn -> range_sum(&1) end)) # Create a new process
-    # |> IO.inspect()
-    |> Enum.map(&Task.await(&1))
-    # |> IO.inspect()
-    |> Enum.sum()
+  # Calculate the sum of all primes up to the given limit sequentially
+  def sum_primes(finish), do: sum_primes_range({1, finish})
+
+  def sum_primes_parallel(finish, threads) do
+    make_ranges(1, finish, threads)
+      |> Enum.map(&Task.async(fn -> sum_primes_range(&1) end))
+      |> Enum.map(&Task.await(&1, 10000))
+      |> Enum.sum()
   end
 
 end
 
-IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000000, 1) end))
-IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000000, 2) end))
-IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000000, 3) end))
-IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000000, 4) end))
-IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000000, 5) end))
-IO.inspect(:timer.tc(fn -> Sums.total_sum(1, 1000000, 6) end))
+IO.puts("Suma de primos secuencial:")
+t1 = :timer.tc(fn -> Hw.Primes.sum_primes(5_000_000) end) |> IO.inspect()
+
+IO.puts("Suma de primos paralela:")
+tp = :timer.tc(fn -> Hw.Primes.sum_primes_parallel(5_000_000, 4) end) |> IO.inspect()
+
+IO.puts("Speedup con 4 procesadores:")
+elem(t1, 0) / elem(tp, 0) |> Float.round(4) |> IO.puts()

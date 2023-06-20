@@ -7,11 +7,11 @@ defmodule Sums do
 
     # Create a new process
     [{1, 400}, {401, 600}, {601, 800}, {801, 1000}]
-    |> Enum.map(&Task.async(fn -> range_sum(&1) end))
-    # |> IO.inspect()
-    |> Enum.map(&Task.await(&1))
-    # |> IO.inspect()
-    |> Enum.sum()
+      |> Enum.map(&Task.async(fn -> range_sum(&1) end))
+      # |> IO.inspect()
+      |> Enum.map(&Task.await(&1))
+      # |> IO.inspect()
+      |> Enum.sum()
 
   end
 
